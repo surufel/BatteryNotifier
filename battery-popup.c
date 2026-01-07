@@ -18,10 +18,6 @@
 
 // Urgency Enum: 0 = Low Priority, 1 = Normal Priority, 2 = Critical Priority
 
-int main(){
-
-notify_init("BatteryAlert");
-
 int percent_read(){
     FILE *file_battery = fopen("/sys/class/power_supply/BAT0/capacity", "r");
     // Battery capacity file address, read-only perm
@@ -32,8 +28,21 @@ int percent_read(){
     }
     return percent;
 }
-    
 
+int isCharging(){
+    char status[20];
+    FILE *charger_status("sys/class/power_supply/BAT0/status", "r");
+    if (charger_stats){
+        fscanf(f, "%s", status);
+        fclose(charger_status);
+        return (strcmp(status, "Discharging") == 0);
+    }
+    return 0;
+}
+    
+int main(){
+
+notify_init("BatteryAlert");
 // Creating notifiers
 NotifyNotification *charging = notify_notification_new(
         "CHARGING . . .",
