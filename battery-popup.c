@@ -29,7 +29,7 @@ int percent_read(){
     return percent;
 }
 
-int isCharging(){
+int isNotCharging(){
     char status[20];
     FILE *charger_status("sys/class/power_supply/BAT0/status", "r");
     if (charger_stats){
