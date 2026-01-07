@@ -31,11 +31,11 @@ int percent_read(){
 
 int isNotCharging(){
     char status[20];
-    FILE *charger_status("sys/class/power_supply/BAT0/status", "r");
+    FILE *charger_status = fopen("sys/class/power_supply/BAT0/status", "r");
     if (charger_stats){
-        fscanf(f, "%s", status);
-        fclose(charger_status);
-        return (strcmp(status, "Discharging") == 0);
+        fscanf(charger_stats, "%s", status);
+        fclose(charger_stats);
+        return (strcmp(stats, "Discharging") == 0);
     }
     return 0;
 }
