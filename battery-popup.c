@@ -108,7 +108,7 @@ int hasAlerted = 0;
 
                 notify_notification_set_urgency(
                         charging,
-                        NULL
+                        NOTIFY_URGENCY_CRITICAL
                         );
 
                 notify_notification_show(
