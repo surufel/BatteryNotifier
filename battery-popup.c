@@ -51,13 +51,22 @@ int hasAlerted = 0;
         
         if (percentage <= 20 && isNotCharging()) {
             if (!hasAlerted) {
-        NotifyNotification *lowAlert = notify_notification_new(
+                NotifyNotification *lowAlert = notify_notification_new(
                 "LOW BATTERY",
                 "Your battery is low (15%), connect your device to a power supply!",
                 "low-battery"
                 );
-                notify_notification_set_urgency(lowAlert, NOTIFY_URGENCY_CRITICAL);
-                notify_notification_show(lowAlert, NULL);
+
+                notify_notification_set_urgency(
+                        lowAlert,
+                        NOTIFY_URGENCY_CRITICAL
+                        );
+
+                notify_notification_show(
+                        lowAlert,
+                        NULL
+                        );
+
                 g_object_unref(G_OBJECT(lowAlert));
                 hasAlerted = 1; // Stop spamming
             }
@@ -67,13 +76,21 @@ int hasAlerted = 0;
 
         if (percentage <= 10 && isNotCharging()) {
             if (!hasAlerted) {
-        NotifyNotification *urgencyAlert = notify_notification_new(
+                NotifyNotification *urgencyAlert = notify_notification_new(
                 "CRITICAL BATTERY PERCENTAGE",
                 "Your battery is critically low (10%), hurry up and connect your device to a power supply!",
                 "critically-low-battery"
                 );
-                notify_notification_set_urgency(urgencyAlert, NOTIFY_URGENCY_CRITICAL);
-                notify_notification_show(urgencyAlert, NULL);
+                notify_notification_set_urgency(
+                        urgencyAlert,
+                        NOTIFY_URGENCY_CRITICAL
+                        );
+                
+                notify_notification_show(
+                        urgencyAlert,
+                        NULL
+                        );
+
                 g_object_unref(G_OBJECT(urgencyAlert));
                 hasAlerted = 1;
             }
@@ -81,21 +98,35 @@ int hasAlerted = 0;
             hasAlerted = 0; // Goes back to 0 whenever it charges or is over 20%
         }
 
-        sleep(60); // Verifies each minute
-    }
-
-
-/*
-NotifyNotification *charging = notify_notification_new(
+        if(!isNotCharging){
+            if (!hasAlerted) {
+                NotifyNotification *charging = notify_notification_new(
                 "CHARGING . . .",
                 "The device is currently being charged.",
                 "charging"
                 );
-notify_notification_set_urgency(
-        charging,
-        NULL
-        );
-*/
+
+                notify_notification_set_urgency(
+                        charging,
+                        NULL
+                        );
+
+                notify_notification_show(
+                        charging,
+                        NULL
+                        );
+
+                g_object_unref(G_OBJECT(charging));
+                hasAlerted = 1;
+            } 
+        } else if (isNotCharging){
+                hasAlerted = 0;
+            }
+
+        sleep(60); // Verifies each minute
+    }
+    notify_uninit();
+    return 0;
 }
 
 
