@@ -1,4 +1,6 @@
 #include<stdio.h>
+#include<stdlib.h>
+#include<unistd.h>
 #include<libnotify/notify.h>
 /* Esse é o meu primeiro projeto do ano.
  * Estou fazendo isso não apenas por portfólio, eu tenho um problema
@@ -15,8 +17,6 @@
  * para aqueles que não tem, e querem o menor bloating possível e ainda com uma boa aparência
  * (que também é meu objetivo).
  * */
-
-// Urgency Enum: 0 = Low Priority, 1 = Normal Priority, 2 = Critical Priority
 
 int percent_read(){
     FILE *file_battery = fopen("/sys/class/power_supply/BAT0/capacity", "r");
@@ -44,38 +44,58 @@ int main(){
 
 notify_init("BatteryAlert");
 // Creating notifiers
+
+int hasAlerted = 0;
+    while (1) {
+        int percentage = percent_read();
+        
+        if (percentage <= 20 && isNotCharging()) {
+            if (!hasAlerted) {
+        NotifyNotification *lowAlert = notify_notification_new(
+                "LOW BATTERY",
+                "Your battery is low (15%), connect your device to a power supply!",
+                "low-battery"
+                );
+                notify_notification_set_urgency(lowAlert, NOTIFY_URGENCY_CRITICAL);
+                notify_notification_show(lowAlert, NULL);
+                g_object_unref(G_OBJECT(lowAlert));
+                hasAlerted = 1; // Stop spamming
+            }
+        } else if (percentage > 20 || !isNotCharging()) {
+            hasAlerted = 0; // Goes back to 0 whenever it charges or is over 20%
+        }
+
+        if (percentage <= 10 && isNotCharging()) {
+            if (!hasAlerted) {
+        NotifyNotification *urgencyAlert = notify_notification_new(
+                "CRITICAL BATTERY PERCENTAGE",
+                "Your battery is critically low (10%), hurry up and connect your device to a power supply!",
+                "critically-low-battery"
+                );
+                notify_notification_set_urgency(urgencyAlert, NOTIFY_URGENCY_CRITICAL);
+                notify_notification_show(urgencyAlert, NULL);
+                g_object_unref(G_OBJECT(urgencyAlert));
+                hasAlerted = 1;
+            }
+        } else if (percentage > 10 || !isNotCharging()) {
+            hasAlerted = 0; // Goes back to 0 whenever it charges or is over 20%
+        }
+
+        sleep(60); // Verifies each minute
+    }
+
+
+/*
 NotifyNotification *charging = notify_notification_new(
-        "CHARGING . . .",
-        "The device is currently being charged.",
-        "charging"
-        );
-
-NotifyNotification *lowAlert = notify_notification_new(
-        "LOW BATTERY",
-        "Your battery is low (15%), connect your device to a power supply!",
-        "low-battery"
-        );
-NotifyNotification *urgencyAlert = notify_notification_new(
-        "CRITICAL BATTERY PERCENTAGE",
-        "Your battery is critically low (5%), hurry up and connect your device to a power supply!",
-        "critically-low-battery"
-        );
-
+                "CHARGING . . .",
+                "The device is currently being charged.",
+                "charging"
+                );
 notify_notification_set_urgency(
         charging,
-        0
+        NULL
         );
-
-notify_notification_set_urgency(
-        lowAlert,
-        1
-        );
-
-notify_notification_set_urgency(
-        urgencyAlert,
-        2
-        );
-
+*/
 }
 
 
