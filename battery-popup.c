@@ -113,11 +113,10 @@ notify_init("BatteryAlert");
         int bat_percentage = percentage();
         if (isDischarging()){
             if (bat_percentage <= 10){
-                if(last_alert_level != 3){{critical_battery_percentage();}
-                else if (bat_percentage <= 20){if(last_alert_level != 2){low_battery_percentage();}}}
+                if(last_alert_level != 3){critical_battery_percentage();}}
+                else if (bat_percentage <= 20){if(last_alert_level != 2){low_battery_percentage();}}
                 else{last_alert_level = 0;}
             }
-        }
         else {
             if(last_alert_level != 1){charging_battery();}
         }
@@ -125,4 +124,5 @@ notify_init("BatteryAlert");
     }
 notify_uninit();
 return 0;
+
     }
