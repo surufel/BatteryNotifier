@@ -123,7 +123,7 @@ int hasAlerted = 0;
                 hasAlerted = 0;
             }
 
-        sleep(60); // Verifies each minute
+        sleep(2); // Verifies every 2 seconds
     }
     notify_uninit();
     return 0;
