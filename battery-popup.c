@@ -51,7 +51,6 @@ int last_alert_level = 0; // 0: Normal; 1: Charging; 2: Low; 3: Critical.
         int percentage = percent_read();
         if (isDischarging()){
         if (percentage <= 10 && last_alert_level != 3) {
-            if (!isDischarging) {
                 NotifyNotification *urgencyAlert = notify_notification_new(
                 "CRITICAL BATTERY PERCENTAGE",
                 "Your battery is critically low (10%), hurry up and connect your device to a power supply!",
@@ -69,8 +68,7 @@ int last_alert_level = 0; // 0: Normal; 1: Charging; 2: Low; 3: Critical.
 
                 g_object_unref(G_OBJECT(urgencyAlert));
                 last_alert_level = 3;
-            }
-        } else if (percentage <= 20 && last_alert_level != 1) {
+        } else if (percentage <= 20 && last_alert_level != 2) {
             NotifyNotification *lowAlert = notify_notification_new(
                 "LOW BATTERY",
                 "Your battery is low (15%), connect your device to a power supply!",
@@ -88,7 +86,7 @@ int last_alert_level = 0; // 0: Normal; 1: Charging; 2: Low; 3: Critical.
                         );
 
                 g_object_unref(G_OBJECT(lowAlert));
-                last_alert_level = 1;
+                last_alert_level = 2;
             }
         } else {
             if (last_alert_level != 1){
