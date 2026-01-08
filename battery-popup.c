@@ -2,6 +2,7 @@
 #include<stdlib.h>
 #include<unistd.h>
 #include<libnotify/notify.h>
+#include<string.h>
 /* Esse é o meu primeiro projeto do ano.
  * Estou fazendo isso não apenas por portfólio, eu tenho um problema
  * Estou usando Linux e percebi que algumas instalações limpas feitas em algumas distros como
