@@ -3,21 +3,6 @@
 #include<unistd.h>
 #include<libnotify/notify.h>
 #include<string.h>
-/* Esse é o meu primeiro projeto do ano.
- * Estou fazendo isso não apenas por portfólio, eu tenho um problema
- * Estou usando Linux e percebi que algumas instalações limpas feitas em algumas distros como
- * a do Arch Linux não vem naturalmente com um notificador de bateria, a minha também não.
- * 
- * É um problema você estar usando seu notebook e do nada, ele descarregar.
- * Então, decidi produzir um notificador da porcentagem da bateria.
- *
- * Como esse programa também foi feito para fins de aprendizado, não usarei A.I. (Artificial Intelligence)
- * na produção desse programa. Apenas documentação das bibliotecas usadas.
- *
- * Claro, já existem distribuições que já possuem um programa com proposta igual, mas o meu intuito é
- * para aqueles que não tem, e querem o menor bloating possível e ainda com uma boa aparência
- * (que também é meu objetivo).
- * */
 
  #define BATTERY_LOW_VALUE = 20
  #define BATTERY_CRITICAL_VALUE = 10
