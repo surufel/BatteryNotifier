@@ -77,7 +77,7 @@ int last_alert_level = 0; // 0: Normal; 1: Charging; 2: Low; 3: Critical.
 
                 notify_notification_set_urgency(
                         lowAlert,
-                        NOTIFY_URGENCY_CRITICAL
+                        NOTIFY_URGENCY_NORMAL
                         );
 
                 notify_notification_show(
@@ -98,7 +98,7 @@ int last_alert_level = 0; // 0: Normal; 1: Charging; 2: Low; 3: Critical.
 
                 notify_notification_set_urgency(
                         charging,
-                        NOTIFY_URGENCY_CRITICAL
+                        NOTIFY_URGENCY_LOW
                         );
 
                 notify_notification_show(
