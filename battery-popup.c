@@ -115,7 +115,7 @@ notify_init("BatteryAlert");
             if (bat_percentage <= 10){
                 if(last_alert_level != 3){{critical_battery_percentage();}
                 else if (bat_percentage <= 20){if(last_alert_level != 2){low_battery_percentage();}}}
-                else(bat_percentage > 20){last_alert_level = 0;}
+                else{last_alert_level = 0;}
             }
         }
         else {
