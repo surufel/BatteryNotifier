@@ -31,7 +31,7 @@ int percent_read(){
 }
 
 int isDischarging(){
-    char stats[11];
+    char stats[12];
     FILE *charger_stats = fopen("/sys/class/power_supply/BAT0/status", "r");
     if (charger_stats){
         fscanf(charger_stats, "%s", stats);
@@ -109,8 +109,6 @@ int last_alert_level = 0; // 0: Normal; 1: Charging; 2: Low; 3: Critical.
                 g_object_unref(G_OBJECT(charging));
                 last_alert_level = 1;
             }
-
-        if (percentage > 20){last_alert_level = 0;}
         }
                 sleep(30); // Verifies every 30 seconds
             }
