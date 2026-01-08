@@ -6,11 +6,13 @@
 
  #define BATTERY_LOW_VALUE = 20
  #define BATTERY_CRITICAL_VALUE = 10
+ #define BAT_CAPACITY = "/sys/class/power_supply/BAT0/capacity"
+ #define BAT_STATUS = "/sys/class/power_supply/BAT0/status"
 
 int last_alert_level = 0; // 0: Normal; 1: Charging; 2: Low; 3: Critical.
 
 int percentage(){
-    FILE *file_battery = fopen("/sys/class/power_supply/BAT0/capacity", "r");
+    FILE *file_battery = fopen(BAT_CAPACITY, "r");
     // Battery capacity file address, read-only perm
     int percent = 0;
     if (file_battery){
@@ -22,7 +24,7 @@ int percentage(){
 
 int isDischarging(){
     char stats[12];
-    FILE *charger_stats = fopen("/sys/class/power_supply/BAT0/status", "r");
+    FILE *charger_stats = fopen(BAT_STATUS, "r");
     if (charger_stats){
         fscanf(charger_stats, "%s", stats);
         fclose(charger_stats);
