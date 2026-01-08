@@ -98,7 +98,7 @@ int hasAlerted = 0;
             hasAlerted = 0; // Goes back to 0 whenever it charges or is over 20%
         }
 
-        if(!isNotCharging){
+        if(!isNotCharging()){
             if (!hasAlerted) {
                 NotifyNotification *charging = notify_notification_new(
                 "CHARGING . . .",
