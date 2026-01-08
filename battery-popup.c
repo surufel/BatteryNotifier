@@ -6,8 +6,8 @@
 
  #define BATTERY_LOW_VALUE = 20
  #define BATTERY_CRITICAL_VALUE = 10
- #define BAT_CAPACITY = "/sys/class/power_supply/BAT0/capacity"
- #define BAT_STATUS = "/sys/class/power_supply/BAT0/status"
+ #define BAT_CAPACITY "/sys/class/power_supply/BAT0/capacity"
+ #define BAT_STATUS "/sys/class/power_supply/BAT0/status"
 
 int last_alert_level = 0; // 0: Normal; 1: Charging; 2: Low; 3: Critical.
 
