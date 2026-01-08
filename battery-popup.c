@@ -31,7 +31,7 @@ int percent_read(){
 }
 
 int isDischarging(){
-    char stats[20];
+    char stats[11];
     FILE *charger_stats = fopen("/sys/class/power_supply/BAT0/status", "r");
     if (charger_stats){
         fscanf(charger_stats, "%s", stats);
