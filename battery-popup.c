@@ -22,7 +22,7 @@
 
 int last_alert_level = 0; // 0: Normal; 1: Charging; 2: Low; 3: Critical.
 
-int percent_read(){
+int percentage(){
     FILE *file_battery = fopen("/sys/class/power_supply/BAT0/capacity", "r");
     // Battery capacity file address, read-only perm
     int percent = 0;
@@ -32,8 +32,6 @@ int percent_read(){
     }
     return percent;
 }
-
-int percentage = percent_read();
 
 int isDischarging(){
     char stats[12];
@@ -113,8 +111,8 @@ notify_init("BatteryAlert");
 // Creating notifiers
     while(1){
         if (isDischarging()){
-        if (percentage <= 10 && last_alert_level != 3){critical_battery_percentage();}
-        else if (percentage <= 20 && last_alert_level != 2){low_battery_percentage();}
+        if (percentage() <= 10 && last_alert_level != 3){critical_battery_percentage();}
+        else if (percentage() <= 20 && last_alert_level != 2){low_battery_percentage();}
         } else {last_alert_level = 0;}
         if (last_alert_level != 1){charging_battery(); last_alert_level = 1;}
         sleep(2);} // Verifies every 2 seconds
