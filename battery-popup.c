@@ -110,7 +110,7 @@ int last_alert_level = 0; // 0: Normal; 1: Charging; 2: Low; 3: Critical.
                 last_alert_level = 1;
             }
         }
-                sleep(30); // Verifies every 30 seconds
+                sleep(2); // Verifies every 2 seconds
             }
                 notify_uninit();
                 return 0;
