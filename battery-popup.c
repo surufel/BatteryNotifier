@@ -116,7 +116,7 @@ notify_init("BatteryAlert");
         else if (bat_percentage <= 20 && last_alert_level != 2){low_battery_percentage();}
         else if (bat_percentage > 20){last_alert_level = 0;}
         else {
-            if(last_alert_level != 1){charging_battery(); last_alert_level = 1;}
+            if(last_alert_level != 1){charging_battery();}
         }
     sleep(2);} // Verifies every 2 seconds
     }
