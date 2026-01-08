@@ -114,7 +114,7 @@ int last_alert_level = 0; // 0: Normal; 1: Charging; 2: Low; 3: Critical.
 
         if (percentage > 20){last_alert_level = 0;}
         }
-                sleep(2); // Verifies every 2 seconds
+                sleep(30); // Verifies every 30 seconds
             }
                 notify_uninit();
                 return 0;
