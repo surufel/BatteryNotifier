@@ -19,6 +19,8 @@
  * (que também é meu objetivo).
  * */
 
+ #define BATTERY_LOW_VALUE = 20
+ #define BATTERY_CRITICAL_VALUE = 10
 
 int last_alert_level = 0; // 0: Normal; 1: Charging; 2: Low; 3: Critical.
 
@@ -47,7 +49,7 @@ int isDischarging(){
 void critical_battery_percentage(){
                     NotifyNotification *urgencyAlert = notify_notification_new(
                 "CRITICAL BATTERY PERCENTAGE",
-                "Your battery is critically low (10%), hurry up and connect your device to a power supply!",
+                "Your battery is critically low, hurry up and connect your device to a power supply!",
                 "critically-low-battery"
                 );
                 notify_notification_set_urgency(
@@ -67,7 +69,7 @@ void critical_battery_percentage(){
 void low_battery_percentage(){
     NotifyNotification *lowAlert = notify_notification_new(
                 "LOW BATTERY",
-                "Your battery is low (15%), connect your device to a power supply!",
+                "Your battery is low, connect your device to a power supply!",
                 "low-battery"
                 );
 
@@ -112,9 +114,10 @@ notify_init("BatteryAlert");
     while(1){
         int bat_percentage = percentage();
         if (isDischarging()){
-            if (bat_percentage <= 10){
+            if (bat_percentage <= BATTERY_CRITICAL_VALUE){
                 if(last_alert_level != 3){critical_battery_percentage();}}
-                else if (bat_percentage <= 20){if(last_alert_level != 2){low_battery_percentage();}}
+                else if(bat_percentage <= BATTERY_CRITICAL_VALUE){
+                    if(last_alert_level != 2){low_battery_percentage();}}
                 else{last_alert_level = 0;}
             }
         else {
