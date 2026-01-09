@@ -4,8 +4,8 @@
 #include<libnotify/notify.h>
 #include<string.h>
 
- #define BATTERY_LOW_VALUE = 20
- #define BATTERY_CRITICAL_VALUE = 10
+ #define BATTERY_LOW_VALUE 20
+ #define BATTERY_CRITICAL_VALUE 10
  #define BAT_CAPACITY "/sys/class/power_supply/BAT0/capacity"
  #define BAT_STATUS "/sys/class/power_supply/BAT0/status"
 
