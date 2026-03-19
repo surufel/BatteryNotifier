@@ -1,54 +1,42 @@
 # Battery Notifier for Linux
-This is my first project of the year. I have been using Linux since last year and I noticed some clean
-installs in distributions like Arch Linux, doesn't really come with a battery notifier (telling the user when
-the battery is low, critically low, is charging). Such as mine.
+This is my first project of the year. I have been using Linux since last year and I've noticed some clean
+installs in distributions such as Arch Linux doesn't come with a battery notifier unless your DE (Desktop Environment) comes with it.
+WMs (Window Managers) doesn't come with a battery notifier, you would have to install a custom dotfiles which comes with it (unlikely), or make yourself one.
 
-So, I've decided to make my own battery notifier.
+So, I've decided to make my own battery notifier, so you don't have to.
 
-It happens sometimes that you are using the distribution and your device turns off. That's very stressing.
-This has also happened to me.
+It happens sometimes that you are working on a project, or doing work on your minimal setup. Suddenly, your system turns off, losing progress.
+That's very stressing. It has also happened to me, and not just once. So I have made a solution for that problem.
 
-I've built this program for learning purposes, so there is no A.I. (Artificial Intelligence) code, I only
-have used the documentation of the used libraries.
+I've built this program for learning purposes, so there is no A.I. code, I have only used the documentation of the used libraries.
 
-Of course, there are repositories that solves the same problems as mine, maybe better. But as I have said before,
-This is a code made purely for learning purposes. I am improving this code to use less processing power
+This program is a good option for those who need a lightweight notifier and still seeks minimalism. I am improving this code to use less processing power
 as possible, how all things should've been done.
-
-I don't know if I will program a customized pop-up program in the future. But feel free to use dunst.
 
 ## How to Install?
 
-For now, the Makefile is only made to install the dependencies for Arch Linux.
-For the pop-up notifications, you'll need Dunst or an alternative for it.
-
-First, you'll have to clone the Git repository:
-
-```
-git clone https://github.com/surufel/BatteryNotifier.git
-```
-
-Then, you'll have to go inside the directory through the terminal, and type:
-
-```bash
-make
-```
-
-The dependencies will be installed, and the program will be compiled as well.
-You will need the code and the popup program to be running in the background.
-
-I will change the installation method soon.
-
-
-## For the popup:
-Dunst: https://github.com/dunst-project/dunst
+Make sure you have the dependencies before installing
 
 Arch Linux:
-```
-sudo pacman -S dunst
+```bash
+sudo pacman -S libnotify dunst
 ```
 
-You can use other alternatives as well.
+Debian/Mint/Ubuntu:
+```bash
+sudo apt install libnotify-dev dunst
+```
+
+RHEL/Fedora/CentOS:
+```bash
+sudo dnf install libnotify-devel dunst
+```
+
+After installing the dependencies, execute the following command:
+
+```
+git clone https://github.com/surufel/BatteryNotifier.git && cd BatteryNotifier && bash ./install.sh
+```
 
 ## License
 
